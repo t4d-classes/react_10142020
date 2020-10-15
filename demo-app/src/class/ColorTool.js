@@ -7,6 +7,7 @@ import { withColorTool } from "./withColorTool";
 
 class BaseColorTool extends Component {
   render() {
+
     return (
       <>
         <div>
