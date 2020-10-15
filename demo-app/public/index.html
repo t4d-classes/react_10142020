@@ -109,5 +109,28 @@
 
       setTimeout(gfn, 2000);
     </script> -->
+    <!-- <script>
+      function outer() {
+        let t = 2;
+
+        setTimeout(() => {
+          t = 4;
+        }, 0);
+
+        return function inner() {
+          console.log(t);
+        };
+      }
+
+      const inner = outer();
+
+      inner();
+
+      setTimeout(() => {
+        inner();
+      }, 0);
+
+      // console.dir(inner);
+    </script> -->
   </body>
 </html>

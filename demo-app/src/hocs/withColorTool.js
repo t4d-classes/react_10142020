@@ -4,6 +4,18 @@ export const withColorTool = (PresentationalComponent) => {
   return class ColorToolContainer extends Component {
     state = { colors: [], showArchive: false };
 
+    componentDidMount() {
+      const that = this;
+
+      fetch("http://localhost:3060/colors")
+        .then(function resJSON(res) {
+          return res.json();
+        })
+        .then(function updateColor(colors) {
+          that.setState({ colors });
+        });
+    }
+
     addColor = (color) => {
       this.setState({
         colors: [

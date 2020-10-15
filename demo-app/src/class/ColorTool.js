@@ -3,11 +3,10 @@ import React, { Component } from "react";
 import { ColorList } from "./ColorList";
 import { ColorForm } from "./ColorForm";
 
-import { withColorTool } from "./withColorTool";
+import { withColorTool } from "../hocs/withColorTool";
 
 class BaseColorTool extends Component {
   render() {
-
     return (
       <>
         <div>
