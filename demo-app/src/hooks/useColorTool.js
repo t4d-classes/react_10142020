@@ -1,7 +1,11 @@
 import { useState, useDebugValue } from "react";
 
+import { useList } from "./useList";
+
 export function useColorTool() {
-  const [colors, setColors] = useState([]);
+  const [colors, appendColor, replaceColor] = useList([]);
+
+  const [editColorId, setEditColorId] = useState(-1);
 
   useDebugValue("colors: " + JSON.stringify(colors));
 
@@ -10,28 +14,33 @@ export function useColorTool() {
   useDebugValue("showArchive: " + showArchive);
 
   const addColor = (color) => {
-    setColors([
-      ...colors,
-      {
-        ...color,
-        archive: false,
-        id: Math.max(...colors.map((c) => c.id), 0) + 1,
-      },
-    ]);
+    appendColor({
+      ...color,
+      archive: false,
+    });
   };
+
+  const saveColor = (color) => {
+    replaceColor(color);
+    setEditColorId(-1);
+  };
+
+  const cancelColor = () => setEditColorId(-1);
 
   const archiveColor = (colorId) => {
     const colorIndex = colors.findIndex((c) => c.id === colorId);
-    const newColors = [...colors];
-    newColors[colorIndex] = { ...newColors[colorIndex], archive: true };
-    setColors(newColors);
+    replaceColor({ ...colors[colorIndex], archive: true });
   };
 
   return {
     colors,
-    addColor,
+    editColorId,
     showArchive,
-    setShowArchive,
+    addColor,
+    editColor: setEditColorId,
     archiveColor,
+    saveColor,
+    cancelColor,
+    setShowArchive,
   };
 }

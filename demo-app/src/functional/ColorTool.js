@@ -8,10 +8,14 @@ import { useColorTool } from "../hooks/useColorTool";
 export function ColorTool() {
   const {
     colors,
-    addColor,
+    editColorId,
     showArchive,
-    setShowArchive,
+    addColor,
+    editColor,
     archiveColor,
+    saveColor,
+    cancelColor,
+    setShowArchive,
   } = useColorTool();
 
   return (
@@ -26,7 +30,11 @@ export function ColorTool() {
       </div>
       <ColorList
         colors={colors.filter((c) => !c.archive || showArchive)}
+        editColorId={editColorId}
+        onEdit={editColor}
         onArchive={archiveColor}
+        onSave={saveColor}
+        onCancel={cancelColor}
       />
       <ColorForm buttonText="Add Color" onSubmitColor={addColor} />
     </>

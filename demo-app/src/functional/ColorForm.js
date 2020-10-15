@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { useForm } from "../hooks/useForm";
 
 export function ColorForm({ buttonText, onSubmitColor }) {
   // React engines know which FiberNode we are working
   // on, and retrieves the state from the FiberNode
-  const [colorForm, setColorForm] = useState({
+  const [colorForm, change, resetColorForm] = useForm({
     name: "",
     hexcode: "",
   });
 
-  const change = (e) => {
-    setColorForm({
-      ...colorForm,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const submitColor = () => {
     onSubmitColor({ ...colorForm });
-    setColorForm({
-      name: "",
-      hexcode: "",
-    });
+    resetColorForm();
   };
 
   return (

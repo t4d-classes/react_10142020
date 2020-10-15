@@ -1,16 +1,35 @@
 import React from "react";
 
-export function ColorList({ colors, onArchive }) {
+import { ColorViewListItem } from "./ColorViewListItem";
+import { ColorEditListItem } from "./ColorEditListItem";
+
+export function ColorList({
+  colors,
+  editColorId,
+  onEdit: edit,
+  onArchive: archive,
+  onSave: save,
+  onCancel: cancel,
+}) {
   return (
     <ul>
-      {colors.map((color) => (
-        <li key={color.id}>
-          {color.name} {color.hexcode}
-          <button type="button" onClick={() => onArchive(color.id)}>
-            Archive
-          </button>
-        </li>
-      ))}
+      {colors.map((color) =>
+        color.id === editColorId ? (
+          <ColorEditListItem
+            key={color.id}
+            color={color}
+            onSave={save}
+            onCancel={cancel}
+          />
+        ) : (
+          <ColorViewListItem
+            key={color.id}
+            color={color}
+            onEdit={edit}
+            onArchive={archive}
+          />
+        )
+      )}
     </ul>
   );
 }
