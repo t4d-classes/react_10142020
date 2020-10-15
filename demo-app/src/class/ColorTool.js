@@ -3,27 +3,31 @@ import React, { Component } from "react";
 import { ColorList } from "./ColorList";
 import { ColorForm } from "./ColorForm";
 
-export class ColorTool extends Component {
-  state = { colors: [] };
+import { withColorTool } from "./withColorTool";
 
-  addColor = (color) => {
-    this.setState({
-      colors: [
-        ...this.state.colors,
-        {
-          ...color,
-          id: Math.max(...this.state.colors.map((c) => c.id), 0) + 1,
-        },
-      ],
-    });
-  };
-
+class BaseColorTool extends Component {
   render() {
     return (
       <>
-        <ColorList colors={this.state.colors} />
-        <ColorForm buttonText="Add Color" onSubmitColor={this.addColor} />
+        <div>
+          <input
+            type="checkbox"
+            checked={this.props.showArchive}
+            onChange={this.props.onToggleShowArchive}
+          />
+          Show Archive
+        </div>
+        <ColorList
+          colors={this.props.colors}
+          onArchive={this.props.onArchiveColor}
+        />
+        <ColorForm
+          buttonText="Add Color"
+          onSubmitColor={this.props.onAddColor}
+        />
       </>
     );
   }
 }
+
+export const ColorTool = withColorTool(BaseColorTool);

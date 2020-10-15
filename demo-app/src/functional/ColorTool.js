@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { ColorList } from "./ColorList";
 import { ColorForm } from "./ColorForm";
 
-export function ColorTool() {
-  const [colors, setColors] = useState([]);
+import { useColorTool } from "../hooks/useColorTool";
 
-  const addColor = (color) => {
-    setColors([
-      ...colors,
-      { ...color, id: Math.max(...colors.map((c) => c.id), 0) + 1 },
-    ]);
-  };
+export function ColorTool() {
+  const {
+    colors,
+    addColor,
+    showArchive,
+    setShowArchive,
+    archiveColor,
+  } = useColorTool();
 
   return (
     <>
-      <ColorList colors={colors} />
+      <div>
+        <input
+          type="checkbox"
+          checked={showArchive}
+          onChange={() => setShowArchive(!showArchive)}
+        />
+        Show Archive
+      </div>
+      <ColorList
+        colors={colors.filter((c) => !c.archive || showArchive)}
+        onArchive={archiveColor}
+      />
       <ColorForm buttonText="Add Color" onSubmitColor={addColor} />
     </>
   );
