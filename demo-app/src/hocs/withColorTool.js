@@ -4,16 +4,34 @@ export const withColorTool = (PresentationalComponent) => {
   return class ColorToolContainer extends Component {
     state = { colors: [], showArchive: false };
 
-    componentDidMount() {
-      const that = this;
+    // componentDidMount() {
+    //   const that = this;
 
-      fetch("http://localhost:3060/colors")
-        .then(function resJSON(res) {
-          return res.json();
-        })
-        .then(function updateColor(colors) {
-          that.setState({ colors });
-        });
+    //   return fetch("http://localhost:3060/colors")
+    //     .then(function resJSON(res) {
+    //       return res.json();
+    //     })
+    //     .then(function updateColor(colors) {
+    //       that.setState({ colors });
+    //     });
+    // }
+
+    // componentDidMount() {
+    //   return fetch("http://localhost:3060/colors")
+    //     .then((res) => {
+    //       return res.json();
+    //     })
+    //     .then((colors) => {
+    //       this.setState({ colors });
+    //     });
+    // }
+
+    async componentDidMount() {
+      const res = await fetch("http://localhost:3060/colors");
+
+      const colors = await res.json();
+
+      this.setState({ colors });
     }
 
     addColor = (color) => {

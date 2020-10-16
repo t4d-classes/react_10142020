@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const useList = (initialItems) => {
-  const [items, setItems] = useState(initialItems);
+export const useList = (getInitialItems) => {
+  const [items, setItems] = useState([]);
+
+  useEffect(
+    function useListMount() {
+      getInitialItems().then((items) => setItems(items));
+    },
+    [getInitialItems]
+  );
 
   const appendItem = (item) => {
     setItems([

@@ -1,9 +1,15 @@
-import { useState, useDebugValue } from "react";
+import { useState, useDebugValue, useCallback } from "react";
 
 import { useList } from "./useList";
 
 export function useColorTool() {
-  const [colors, appendColor, replaceColor] = useList([]);
+  const [colors, appendColor, replaceColor] = useList(
+    useCallback(function getColors() {
+      return fetch("http://localhost:3060/colors").then((res) => {
+        return res.json();
+      });
+    }, [])
+  );
 
   const [editColorId, setEditColorId] = useState(-1);
 
