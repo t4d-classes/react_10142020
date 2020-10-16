@@ -40,6 +40,7 @@ export function useChatAppStore() {
   );
 
   useEffect(
+    // componentDidUpdate
     function registerReceiveMessage() {
       if (!socketRef.current) return;
 
@@ -47,6 +48,7 @@ export function useChatAppStore() {
 
       socketRef.current.on(CHAT_MESSAGE, lastReceiveChatMessage);
 
+      // getSnapshotBeforeUpdate
       return function unregisterReceiveMessage() {
         if (!socketRef.current) return;
 
