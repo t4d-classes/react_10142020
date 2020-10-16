@@ -6,7 +6,8 @@ export const useForm = (initialForm) => {
   const change = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.type === "number" ? Number(e.target.value) : e.target.value,
     });
   };
 
