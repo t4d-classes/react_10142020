@@ -3,7 +3,7 @@ import React from "react";
 import { ColorList } from "./ColorList";
 import { ColorForm } from "./ColorForm";
 
-import { useColorTool } from "../hooks/useColorTool";
+import { useColorToolStoreContext } from "../contexts/colorToolStoreContext";
 
 export function ColorTool() {
   const {
@@ -16,7 +16,7 @@ export function ColorTool() {
     saveColor,
     cancelColor,
     setShowArchive,
-  } = useColorTool();
+  } = useColorToolStoreContext();
 
   return (
     <>
