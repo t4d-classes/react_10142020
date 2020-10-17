@@ -1,0 +1,35 @@
+.calc-tool header {
+  margin-top: 30px;
+}
+
+.calc-tool form {
+  margin-top: 20px;
+}
+
+.calc-tool ul {
+  margin: 20px 0;
+}
+
+.calc-tool table caption {
+  margin: 5px;
+  font-size: 1.2rem;
+}
+
+.calc-tool table th,
+.calc-tool table caption {
+  font-weight: bold;
+  text-align: center;
+}
+
+.calc-tool table td,
+.calc-tool table th {
+  padding: 5px;
+}
+
+.calc-tool table td {
+  text-align: right;
+}
+
+.calc-tool fieldset {
+  margin-top: 10px;
+}
